@@ -28,9 +28,10 @@ def scrape_all():
     nasa_title = soup.find('div', class_='content_title').text
     nasa_paragraph = soup.find('div', class_='rollover_description_inner').text
 
-
     mars_dict['nasa_title'] = nasa_title
     mars_dict['nasa_paragraph'] = nasa_paragraph
+
+    browser.quit()
 
 
     # Scrape JPL Mars - Featured Image
@@ -52,6 +53,8 @@ def scrape_all():
 
     mars_dict['featured_image_url'] = featured_image_url
 
+    browser.quit()
+
 
     # Scrape Mars facts
     browser = init_browser()
@@ -63,6 +66,8 @@ def scrape_all():
 
     mars_dict['mars_df'] = mars_df
 
+    browser.quit()
+
 
     # Scrape Mars Hemisphere titles and images
     browser = init_browser()
@@ -73,7 +78,8 @@ def scrape_all():
     hemi_data = []
 
     for i in range(4):
-        browser.find_by_css("a.itemLink h3")[i].click()
+#     browser.find_by_css("a.product-item h3")[i].click()
+        browser.find_by_css("h3")[i].click()
 
         hemi_soup = BeautifulSoup(browser.html, "html.parser")
         try:
