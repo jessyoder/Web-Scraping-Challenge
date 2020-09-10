@@ -29,12 +29,12 @@
         <div class="row">
           <div class="col-md-8" class="container" style="background-color: cornsilk; margin: 20px; padding: 10px;">
             <h2> Featured Mars Image </h2>
-            <img src="{{mars.featured_url}}" alt="Featured Image" style="max-width: 100%;">
+            <img src="{{mars.featured_image_url}}" alt="Featured Image" style="max-width: 100%;">
           </div>
           <div class="row">
             <div class="col-md-4" style="background-color: cornsilk; margin: 20px; padding: 10px;">
               <h2> Mars Facts </h2>
-              <p>{{mars.mars_df}}</p>
+              {{mars.mars_df | safe}}
             </div>
           </div>
         </div>
@@ -43,8 +43,8 @@
         <div class="row">
           <div class="col-md-12" style="background-color: cornsilk; margin: 20px; padding: 10px;">
             <h1>Mars Hemispheres</h1>
-            <p>{{mars.hemisphere_image_urls}}</p>
-            <h4>{{mars.hemi_data}}</h4>
+            <h3>{{mars.hemi_data[0].title}}</h3>
+            <img src={{mars.hemi_data[0].img_url}}>
           </div>
         </div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

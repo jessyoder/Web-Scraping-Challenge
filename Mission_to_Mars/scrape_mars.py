@@ -2,6 +2,7 @@ from splinter import Browser
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
+import time
 
 def init_browser():
     executable_path = {'executable_path': 'chromedriver.exe'}
@@ -45,6 +46,8 @@ def scrape_all():
     # Click the More Info button
     browser.click_link_by_partial_text('more info')
 
+    time.sleep(5)
+
     html = browser.html
     mars_soup = BeautifulSoup(html, 'html.parser')
 
@@ -63,11 +66,13 @@ def scrape_all():
     tables = pd.read_html(mars_facts_url)
 
     mars_df = tables[0]
+    mars_df.columns=['description', 'mars_info']
+    mars_df.set_index('description', inplace=True)
+    mars_df = mars_df.to_html()
 
     mars_dict['mars_df'] = mars_df
 
     browser.quit()
-
 
     # Scrape Mars Hemisphere titles and images
     browser = init_browser()
