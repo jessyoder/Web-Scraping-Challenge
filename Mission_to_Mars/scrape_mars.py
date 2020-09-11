@@ -22,14 +22,16 @@ def scrape_all():
     # Navigate to website
     nasa_url = 'https://mars.nasa.gov/news/'
     browser.visit(nasa_url)
+    time.sleep(1)
     # Scrape page into soup
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
     # Find articles
     nasa_articles = soup.find_all('div', class_='list_text')
-    # Gather article title and article descriptoin
-    nasa_title = soup.find('div', class_='content_title').text
-    nasa_paragraph = soup.find('div', class_='rollover_description_inner').text
+    # Gather article title and article description
+    slide = soup.find('li', class_="slide")
+    nasa_title = slide.find('div', class_='content_title').text
+    nasa_paragraph = slide.find('div', class_='article_teaser_body').text
     # Put the article title and description into mars_dict
     mars_dict['nasa_title'] = nasa_title
     mars_dict['nasa_paragraph'] = nasa_paragraph
@@ -46,7 +48,7 @@ def scrape_all():
     # Click the More Info button
     browser.click_link_by_partial_text('more info')
     # Wait for the page to load
-    time.sleep(3)
+    time.sleep(1)
     #Scrape page into mars_soup
     html = browser.html
     mars_soup = BeautifulSoup(html, 'html.parser')
